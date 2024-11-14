@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a student to all bootcamp courses</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_css/delete_course.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Are you sure you want to delete the following course?</h2>
+        <p>Name: {{course.name}}</p>
+        <p>Description: {{course.desc}}</p>
+        <a class="btn btn-secondary" href="/">No</a>
+        <form action="/courses/destroy/{{course.id}}/delete" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes! I want to delete this</button>
+        </form>
+        
+    </div>
+
+
+
+    <script src="{% static 'js/bootstrap/bootstrap.js' %}" ></script>
+</body>
+</html>

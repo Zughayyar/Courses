@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a student to all bootcamp courses</title>
+    {% load static %} 
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/my_css/index.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-add">
+            <h1>Add a new course</h1>
+            <form action="/courses/add" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Name:</label>
+                    <input name="name" type="text" class="form-control" placeholder="name">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description:</label>
+                    <textarea name="desc" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary mb-3">Add</button>
+                </div>
+            </form>
+        </div>
+        <div class="text-success">
+            <hr>
+        </div>
+        <div>
+            <h1>Courses</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr class="table-primary">
+                      <th scope="col">Course Name</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Date Added</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{course.name}}</td>
+                        <td>{{course.desc}}</td>
+                        <td>{{course.created_at}}</td>
+                        <td><a href="/courses/destroy/{{course.id}}">remove</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+
+
+    <script src="{% static 'js/bootstrap/bootstrap.js' %}" ></script>
+</body>
+</html>
